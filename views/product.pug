@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  section
+    a(href="/products")='Go back to products'
+    if(product)
+      h1= product.product_name
+      div!= product.description
+      span.monetary=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
+      span.available= (product.deletedAt === null) ? ' available' : ' unavailable'

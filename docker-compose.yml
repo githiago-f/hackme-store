@@ -1,0 +1,30 @@
+version: '3'
+services:
+  sales_db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: mary_store
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - sales_data:/var/lib/mysqlw
+    ports:
+      - "3306:3306"
+
+  my_app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sales_db
+    environment:
+      DB_HOST: sales_db
+      DB_NAME: sales
+      DB_USER: user
+      DB_PASSWORD: password
+    volumes:
+      - .:/app
+
+volumes:
+  sales_data:

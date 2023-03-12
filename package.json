@@ -1,0 +1,26 @@
+{
+  "name": "sql-injection",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node app.js | npx bunyan",
+    "dev": "npx nodemon --watch . -e js app.js | npx bunyan",
+    "knex": "npx knex --knexfile ./infra/db/connection.js",
+    "migrate": "npm run knex migrate:up | npx bunyan",
+    "seed": "npm run knex seed:run | npx bunyan"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.15",
+    "cookie-parser": "~1.4.4",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "knex": "^2.4.2",
+    "morgan": "~1.9.1",
+    "mysql2": "^3.2.0",
+    "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}

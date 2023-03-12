@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  section
+    div(style="margin-bottom: 20px")
+      a(href="/products")='Go back to products'
+    form(method="POST", action="/products")
+      div(style="margin-bottom: 20px")
+        input.input#name(name="name")
+      div(style="margin-bottom: 20px")
+        input.input#price(name="price", type="number", step="0.01")
+      div(style="margin-bottom: 20px")
+        textarea.input(name="description")
+      div(style="margin-bottom: 20px")
+        button.input(type="submit")='Criar produto'

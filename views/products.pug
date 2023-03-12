@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  section
+    div(style="margin-bottom: 20px")
+      a(href="/products/create")='Create product'
+    div(style="margin-bottom: 20px")
+      form(method="GET", action="/products")
+        input.input#search(name="product", value="", placeholder="Search by product name")
+        button.input.cyan(type="submit")= 'Buscar'
+    script.
+      const productFieldValue = new URL(location.href).searchParams.get('product')
+      if(productFieldValue)
+        document.getElementById('search').value = productFieldValue;
+    if(sales)
+      for product in sales
+        div
+          div.product
+            h1= product.product_name
+            div!= product.description
+            span.monetary=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
+            span.available= (product.deletedAt === null) ? ' available' : ' unavailable'
+          a(href='/products/' + product.product_id)= 'View Product'
