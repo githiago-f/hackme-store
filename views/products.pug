@@ -2,22 +2,30 @@ extends layout
 
 block content
   section
-    div(style="margin-bottom: 20px")
-      a(href="/products/create")='Create product'
-    div(style="margin-bottom: 20px")
+    div(style="margin: 20px 0")
       form(method="GET", action="/products")
         input.input#search(name="product", value="", placeholder="Search by product name")
-        button.input.cyan(type="submit")= 'Buscar'
+        button.input.cyan(type="submit") Buscar
+    div
+      h1 Welcome to My Online Store
     script.
       const productFieldValue = new URL(location.href).searchParams.get('product')
       if(productFieldValue)
         document.getElementById('search').value = productFieldValue;
-    if(sales)
-      for product in sales
-        div
-          div.product
-            h1= product.product_name
-            div!= product.description
-            span.monetary=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
-            span.available= (product.deletedAt === null) ? ' available' : ' unavailable'
-          a(href='/products/' + product.product_id)= 'View Product'
+    div.products-container
+      if(sales)
+        each product in sales
+          .product
+            h2= product.product_name
+            div.product-description!= product.description
+            p.price=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
+            div
+              span.status= (product.deletedAt === null) ? ' available' : ' unavailable'
+              a(href='/products/' + product.product_id)= 'View Product'
+    div
+      - var page = 0;
+      ul.paginated
+        while page <= totalPages
+          - url.searchParams.set('page', page)
+          li
+            a(href=url.toString(), class=(currentPage === page && 'active'))= ++page

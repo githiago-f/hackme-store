@@ -1,17 +1,136 @@
 body {
-  padding: 50px;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.input {
+input.input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button.cyan {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button.cyan:hover {
+  background-color: #0097a7;
+}
+
+h1 {
+  text-align: center;
+}
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+  justify-items: center;
+  margin: 20px;
+}
+
+.product {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #ccc;
   width: 100%;
-  padding: 16px 8px;
-  font-size: 15px;
 }
-.cyan {
+
+.product * {
+  padding: 16px;
+  margin: 0;
+}
+
+.product .product-description, .product .product-description > * {
+  overflow: hidden; /* Hide any text that exceeds the height */
+  text-overflow: ellipsis; /* Add an ellipsis to indicate truncated text */
+  white-space: nowrap; /* Add this line to prevent text wrapping */
+  height: 3.6em;
+  line-height: 1.2;
+}
+
+.column-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #ccc;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Remove the spinner on Firefox */
+}
+
+input#search {
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px auto auto auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 600px;
+  text-align: center;
+}
+
+ul.paginated {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+ul.paginated li {
+  margin: 0 5px;
+}
+
+ul.paginated a {
+  text-decoration: none;
+  color: #333;
+  background-color: #f2f2f2;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+ul.paginated a:hover {
+  background-color: #ccc;
+}
+
+ul.paginated a.active {
   background-color: darkcyan;
 }
+
+.status {
+  color: forestgreen;
+}
+

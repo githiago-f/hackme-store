@@ -2,9 +2,8 @@ extends layout
 
 block content
   section
-    a(href="/products")='Go back to products'
-    if(product)
+    .centered-content
       h1= product.product_name
-      div!= product.description
-      span.monetary=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
-      span.available= (product.deletedAt === null) ? ' available' : ' unavailable'
+      p.product-price= Number(product.product_price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+      div.product-description!= product.description
+      span.status= (product.deletedAt === null) ? ' available' : ' unavailable'

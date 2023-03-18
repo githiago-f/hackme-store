@@ -1,5 +1,3 @@
-import {rootLogger} from "../../../logging/root-logger.js";
-
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
@@ -15,7 +13,7 @@ export const seed = async function(knex) {
   await knex(table).del();
   await knex(productsTable).del();
 
-  const products = await knex(productsTable).insert([
+  await knex(productsTable).insert([
     {
       "product_name": "dolore id duis irure",
       "product_price": 23.48,
@@ -105,8 +103,9 @@ export const seed = async function(knex) {
       "product_price": 112.99
     }
   ]);
+  const products = (await knex(productsTable).select('product_id')).map(i=>i.product_id);
 
-  const users  = await knex(table).insert([
+  await knex(table).insert([
       {
         "user_name": "Agnes",
         "user_email": "agnes_evans@gmail.com",
@@ -168,8 +167,9 @@ export const seed = async function(knex) {
         "user_password": "123456"
       }
     ]);
+  const users  = (await knex(table).select('user_id')).map(i=>i.user_id);
 
-  const cards = await knex(cardTable).insert([
+  await knex(cardTable).insert([
     {
       "user_id": users[Math.floor(Math.random()*users.length)],
       "card_flag": "amex",
@@ -315,15 +315,35 @@ export const seed = async function(knex) {
       "card_expiration_date": "6/2023"
     }
   ]);
+  const cards = (await knex(cardTable).select('card_id')).map(i=>i.card_id);
 
-  const ordersData = new Array(30).fill({
-    order_status: ['paid', 'canceled', 'waiting', 'confirmed'][Math.floor(Math.random()*4)],
-    payment_method: ['card', 'pix', 'boleto'][Math.floor(Math.random()*3)],
-    card_used: cards[Math.floor(Math.random()*cards.length)],
-    product_id: products[Math.floor(Math.random()*products.length)],
-    user_id: users[Math.floor(Math.random()*users.length)]
-  });
-  await knex(ordersTable).insert(ordersData);
+  const ordersData = new Array(42).fill(1);
+
+  class Evaluator {
+    static get user() {
+      return users[Math.floor(Math.random()*users.length)];
+    }
+    static get cardId() {
+      return cards[Math.floor(Math.random()*cards.length)];
+    }
+    static get orderStatus() {
+      return ['paid', 'canceled', 'waiting', 'confirmed'][Math.floor(Math.random()*4)];
+    }
+    static get product() {
+      return products[Math.floor(Math.random()*products.length)];
+    }
+    static get paymentMethod() {
+      return ['card', 'pix', 'boleto'][Math.floor(Math.random()*3)];
+    }
+  }
+
+  await knex(ordersTable).insert(ordersData.map(i => ({
+    order_status: Evaluator.orderStatus,
+    payment_method: Evaluator.paymentMethod,
+    card_used: Evaluator.cardId,
+    product_id: Evaluator.product,
+    user_id: Evaluator.user
+  })));
 };
 
 
