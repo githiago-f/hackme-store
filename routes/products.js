@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { db } from "../infra/db/connection.js";
 import { rootLogger } from '../infra/logging/root-logger.js';
+import createError from "http-errors";
 
 const logger = rootLogger.child();
 const router = Router();
-
 const render = (view, title) =>
   (req, res) => res.render(view, { title });
 
@@ -31,12 +31,18 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/create', render('create_product', 'Create project'));
+router.get('/{id}/edit', () => {
+
+});
 
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
   const query = db.raw(`SELECT * FROM products WHERE product_id = ${id} AND deletedAt is null`);
   logger.info(query.toSQL().sql);
   const [product] = (await query)[0];
+  if(!product) {
+    return next(createError(404));
+  }
   logger.info(product);
   res.render('product', { product, title: product.product_name });
 });
@@ -51,6 +57,10 @@ router.post('/', async (req, res) => {
     })
     .returning('product_id');
   res.redirect('/products/' + id);
+});
+
+router.patch('/', async (req, res) => {
+
 });
 
 export default router;

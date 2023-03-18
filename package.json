@@ -7,8 +7,9 @@
     "start": "node app.js | npx bunyan",
     "dev": "npx nodemon --watch . -e js app.js | npx bunyan",
     "knex": "npx knex --knexfile ./infra/db/connection.js",
-    "migrate": "npm run knex migrate:up | npx bunyan",
-    "seed": "npm run knex seed:run | npx bunyan"
+    "migrate": "npm run knex migrate:latest | npx bunyan",
+    "seed": "npm run knex seed:run | npx bunyan",
+    "docker": "npm run migrate && npm run seed && npm run dev"
   },
   "dependencies": {
     "bunyan": "^1.8.15",

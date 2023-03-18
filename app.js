@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res, _) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -41,23 +41,7 @@ app.use(function(err, req, res, next) {
   rootLogger.error(err);
 });
 
-const normalizePort = (val) => {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-const port = normalizePort(process.env.PORT || '8080');
+const port = process.env.PORT ?? 8080;
 app.set('port', port);
 
-app.listen(port, () => rootLogger.info(`Listening on port ${port}`));
+app.listen(port, () => rootLogger.info(`Listening on port http://localhost:${port}`));
