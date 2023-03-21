@@ -34,7 +34,7 @@ passport.use('local', new LocalStrategy({usernameField: 'email'}, (email, passwo
 
 /**
  * This part of the code will serialize (transform into a string)
- * the user object returned from te LocalStrategy .
+ * the user object returned from te LocalStrategy.
  */
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
