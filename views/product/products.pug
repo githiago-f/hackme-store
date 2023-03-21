@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   section
@@ -7,21 +7,20 @@ block content
         input.input#search(name="product", value="", placeholder="Search by product name")
         button.input.cyan(type="submit") Buscar
     div
-      h1 Welcome to My Online Store
+      h1 Welcome to MaryStore
     script.
       const productFieldValue = new URL(location.href).searchParams.get('product')
       if(productFieldValue)
         document.getElementById('search').value = productFieldValue;
-    div.products-container
-      if(sales)
-        each product in sales
-          .product
-            h2= product.product_name
-            div.product-description!= product.description
-            p.price=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
-            div
-              span.status= (product.deletedAt === null) ? ' available' : ' unavailable'
-              a(href='/products/' + product.product_id)= 'View Product'
+    .products-container
+      each product in products
+        .product
+          h2= product.product_name
+          div.product-description!= product.description
+          p.price=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
+          div
+            span.status= (product.deletedAt === null) ? ' available' : ' unavailable'
+            a(href='/products/' + product.product_id)= 'View Product'
     div
       - var page = 0;
       ul.paginated

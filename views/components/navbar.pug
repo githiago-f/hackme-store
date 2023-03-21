@@ -2,15 +2,22 @@ style.
   nav {
     background-color: #333;
     overflow: hidden;
+    display: flex;
+    justify-content: space-evenly;
   }
   nav ul {
     list-style-type: none;
     margin: 0;
-  padding: 0;
-  overflow: hidden;
+    padding: 0;
+    overflow: hidden;
   }
   nav li {
     float: left;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-items: center;
+    align-items: center;
   }
   nav li a {
     display: block;
@@ -34,8 +41,14 @@ style.
   }
 
 nav
+  a.nostyle(href="/products")
+    h1 MaryStore
   ul
     li
       a(href="/products") Home
-    li
-      a(href="/products/create", class="create-product") Create Product
+    if typeof user === 'undefined'
+      li
+        a(href="/auth/login") Login
+    if typeof user !== 'undefined'
+      li
+        a.create-product(href="/products/create") Create Product

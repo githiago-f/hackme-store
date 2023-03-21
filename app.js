@@ -5,8 +5,14 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import * as url from 'url';
 import { rootLogger } from './infra/logging/root-logger.js';
+import { createServer } from 'node:http';
+import session from 'express-session';
+import './infra/login/auth-providers.js';
 
-import productsRouter from './routes/products.js';
+import products from './routes/products.js';
+import orders from "./routes/orders.js";
+import auth from "./routes/auth.js";
+import passport from "passport";
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -22,7 +28,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/products', productsRouter);
+const sessionMiddleware = passport.authenticate('session');
+
+// session and authentication
+app.use(session({
+  secret: 'sql_injection_project_vulnerable_secret', // this secret is also a vulnerability.
+  resave: false,
+  saveUninitialized: false,
+  cookie: {}
+}));
+
+app.get('/', (req, res) => res.redirect('/products'));
+app.use('/auth', sessionMiddleware, auth);
+app.use('/products', sessionMiddleware, products);
+app.use('/orders', sessionMiddleware, orders);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,4 +63,13 @@ app.use(function(err, req, res, _) {
 const port = process.env.PORT ?? 8080;
 app.set('port', port);
 
-app.listen(port, () => rootLogger.info(`Listening on port http://localhost:${port}`));
+const server = createServer(app);
+server.listen(8080, () => {
+  let { address, family, port } = server.address();
+  if(family === 'IPv6' && address === '::') {
+    address = 'localhost';
+  }
+  app.set('address', address);
+  rootLogger.info(`Listening on http://${address}:${port}`);
+});
+

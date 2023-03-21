@@ -134,3 +134,7 @@ ul.paginated a.active {
   color: forestgreen;
 }
 
+.nostyle {
+  text-decoration: none;
+  color: inherit;
+}

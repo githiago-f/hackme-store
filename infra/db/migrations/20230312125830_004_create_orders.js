@@ -9,7 +9,7 @@ export const up = function(knex) {
       t.bigIncrements('order_id').unsigned().primary({ constraintName: 'orders_pk' });
       t.enum('order_status', status).defaultTo('waiting');
       t.enum('payment_method', ['card', 'pix', 'boleto']);
-      t.integer('card_used').unsigned().notNullable();
+      t.integer('card_used').unsigned().nullable();
       t.bigInteger('product_id').unsigned().notNullable();
       t.integer('user_id').unsigned().notNullable();
       t.timestamps({ defaultToNow: true, useCamelCase: true });

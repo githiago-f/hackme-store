@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  section
+    form(method="POST", action="/users/login")
+      div
+        label(for="email") E-mail
+        input#email(type="email", name="email", placeholder="email@email.com")
+      div
+        label(for="password") Password
+        input#password(type="password", name="password", placeholder="*****")
+      div
+        button.cyan(type="submit") Enviar

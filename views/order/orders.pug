@@ -1,0 +1,63 @@
+extends ../layout
+
+block head
+  style.
+    section#orders {
+      max-width: 80%;
+      margin: auto;
+      padding: 40px 0;
+    }
+    table {
+      font-size: 14px;
+      color: #333;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 100%;
+      white-space: nowrap;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    .table thead th {
+      font-weight: bold;
+      background-color: #f2f2f2;
+      color: #333;
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 8px;
+      vertical-align: middle;
+    }
+
+    .table tbody tr {
+      border: 1px solid #ccc;
+    }
+
+    .table tbody td {
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 8px;
+      vertical-align: middle;
+    }
+
+block content
+  section#orders
+    table.table
+      thead
+        tr
+          th Code
+          th Order Status
+          th Payment Method
+          th Card Used
+          th User Email
+          th Product Price
+          th Product Name
+      tbody
+        each order in orders
+          tr
+            td #{order.order_id}
+            td #{order.order_status}
+            td #{order.payment_method}
+            td #{order.card_used}
+            td #{order.user_email}
+            td #{Number(order.product_price).toLocaleString('pt-br', { currency: 'BRL', style: 'currency' })}
+            td #{order.product_name}
