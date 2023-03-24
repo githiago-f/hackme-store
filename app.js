@@ -10,7 +10,8 @@ import session from 'express-session';
 import './infra/login/auth-providers.js';
 
 import products from './routes/products.js';
-import orders from "./routes/orders.js";
+import ordersWithError from "./routes/orders-with-error.js";
+import orders from './routes/orders.js';
 import auth from "./routes/auth.js";
 import passport from "passport";
 
@@ -42,6 +43,7 @@ app.get('/', (req, res) => res.redirect('/products'));
 app.use('/auth', sessionMiddleware, auth);
 app.use('/products', sessionMiddleware, products);
 app.use('/orders', sessionMiddleware, orders);
+app.use('/with-error/orders', sessionMiddleware, ordersWithError);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -21,10 +21,4 @@ block content
           div
             span.status= (product.deletedAt === null) ? ' available' : ' unavailable'
             a(href='/products/' + product.product_id)= 'View Product'
-    div
-      - var page = 0;
-      ul.paginated
-        while page <= totalPages
-          - url.searchParams.set('page', page)
-          li
-            a(href=url.toString(), class=(currentPage === page && 'active'))= ++page
+    include ./../components/pagination

@@ -18,6 +18,7 @@ style.
     display: flex;
     justify-items: center;
     align-items: center;
+    margin-left: 5px;
   }
   nav li a {
     display: block;
@@ -49,6 +50,9 @@ nav
     if typeof user === 'undefined'
       li
         a(href="/auth/login") Login
+    if typeof user !== 'undefined'
+      li
+        a(href="/with-error/orders") Orders
     if typeof user !== 'undefined'
       li
         a.create-product(href="/products/create") Create Product
