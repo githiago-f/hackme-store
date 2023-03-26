@@ -44,6 +44,10 @@ passport.serializeUser(function(user, cb) {
   });
 });
 
+/**
+ * Will deserialize (transform into an object)
+ * the user returned from te cookie session.
+ */
 passport.deserializeUser(function(user, cb) {
   process.nextTick(function() {
     logger.info('Deserializing user: ', user);

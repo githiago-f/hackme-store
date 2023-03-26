@@ -29,8 +29,19 @@ const index = async (req, res, next) => {
   }
 };
 
-const create = (req, res, next) => {
+const create = async (req, res) => {
+  const { card_used, product_id, payment_method } = req.body;
   logger.info('Creating order');
+  if(!req.user) {
+    return res.status(403).redirect('/auth');
+  }
+  const [id] = await db('orders').insert({
+    card_used,
+    product_id,
+    payment_method,
+    user_id: req.user[0].user_id
+  }).returning('order_id');
+  res.redirect('/orders/'+id);
 };
 
 const view = async (req, res, next) => {
@@ -39,13 +50,18 @@ const view = async (req, res, next) => {
   const [order] = await db('orders').select().limit(1)
     .leftJoin('users', 'users.user_id', 'orders.user_id')
     .leftJoin('products', 'products.product_id', 'orders.product_id')
+    .leftJoin('card_data', 'card_data.card_id', 'orders.card_used')
     .where({ order_id: id });
   if(!order) {
     return next(createError(404));
   }
-  res.json(order);
+  res.render('order/index', { title: 'Pedido', order });
 }
 
+/**
+ * All these functions should be protected against the access
+ * for non-owners of each resource or administrators
+ */
 export const ordersController = {
   index,
   create,

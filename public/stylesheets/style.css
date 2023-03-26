@@ -138,3 +138,8 @@ ul.paginated a.active {
   text-decoration: none;
   color: inherit;
 }
+
+.column {
+  display: flex;
+  flex-direction: column;
+}

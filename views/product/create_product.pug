@@ -4,7 +4,13 @@ block content
   section
     form.column-form(method="POST", action="/products")
       div(style="max-width: 500px;")
-        input.input#name(name="product_name", style="width: 100%;")
-        input.input#price(name="price", type="number", step="0.01", style="width: 100%;")
-        textarea.input(name="description", rows=10, style="width: 100%;")
-        button.create-product(type="submit")='Criar produto'
+        div
+          label(for="name") Nome
+          input.input#name(name="product_name", style="width: 100%;")
+        div
+          label(for="price") Preço
+          input.input#price(name="price", type="number", step="0.01", style="width: 100%;")
+        div
+          label(for="description") Descrição
+          textarea.input#description(name="description", rows=10, style="width: 100%;")
+        button.create-product(type="submit") Criar produto

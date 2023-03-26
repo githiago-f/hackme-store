@@ -54,7 +54,8 @@ block content
       tbody
         each order in orders
           tr
-            td #{order.order_id}
+            td
+              a(href=`/orders/${order.order_id}`) #{order.order_id}
             td #{order.order_status}
             td #{order.payment_method}
             td #{order.card_used}

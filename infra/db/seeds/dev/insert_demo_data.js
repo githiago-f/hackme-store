@@ -337,13 +337,18 @@ export const seed = async function(knex) {
     }
   }
 
-  await knex(ordersTable).insert(ordersData.map(i => ({
-    order_status: Evaluator.orderStatus,
-    payment_method: Evaluator.paymentMethod,
-    card_used: Evaluator.cardId,
-    product_id: Evaluator.product,
-    user_id: Evaluator.user
-  })));
+  await knex(ordersTable).insert(
+    ordersData.map(() => {
+      const payment_method = Evaluator.paymentMethod;
+      return {
+        order_status: Evaluator.orderStatus,
+        payment_method,
+        card_used: payment_method === 'card' ? Evaluator.cardId : null,
+        product_id: Evaluator.product,
+        user_id: Evaluator.user
+      };
+    })
+  );
 };
 
 

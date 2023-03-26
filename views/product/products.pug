@@ -19,6 +19,6 @@ block content
           div.product-description!= product.description
           p.price=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
           div
-            span.status= (product.deletedAt === null) ? ' available' : ' unavailable'
-            a(href='/products/' + product.product_id)= 'View Product'
+            span.status= (product.deletedAt === null) ? ' disponível' : ' indisponível'
+            a(href='/products/' + product.product_id)= 'Ver produto'
     include ./../components/pagination

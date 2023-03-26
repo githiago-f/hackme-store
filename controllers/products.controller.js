@@ -40,10 +40,15 @@ const view = async (req, res, next) => {
   if(!product) {
     return next(createError(404));
   }
+  let cards;
+  if(req.user && req.user.length > 0) {
+    cards = await db('card_data').select().where({ user_id: req.user[0].user_id });
+  }
   res.render('product/index', {
     product,
     title: product.product_name,
-    user: req.user
+    user: req.user,
+    cards
   });
 };
 

@@ -1,0 +1,120 @@
+extends ../layout
+
+block head
+  style.
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: -15px;
+    }
+
+    .col-sm-12 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding: 15px;
+    }
+
+    .col-sm-4 {
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+      padding: 15px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    .table td, .table th {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .table th {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
+
+    /* Heading Styles */
+    h2 {
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    /* Media Query for Small Screens */
+    @media screen and (max-width: 767px) {
+      .col-sm-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+
+block content
+  div.container
+    div.row
+      div.col-sm-12
+        h2 Order #{order.order_id}
+        div.row
+          div.col-sm-4
+            h3 User Information
+            table.table
+              tbody
+                tr
+                  td Name
+                  td #{order.user_name}
+                tr
+                  td Surname
+                  td #{order.user_surname}
+                tr
+                  td Email
+                  td #{order.user_email}
+          div.col-sm-4
+            h3 Product Information
+            table.table
+              tbody
+                tr
+                  td Name
+                  td #{order.product_name}
+                tr
+                  td Price
+                  td #{Number(order.product_price).toLocaleString('pt-br', { style: 'currency', currency: 'brl' })}
+          if order.card_used !== null
+            div.col-sm-4
+              h3 Card Information
+              table.table
+                tbody
+                  tr
+                    td Flag
+                    td #{order.card_flag}
+                  tr
+                    td Number
+                    td #{order.card_number}
+                  tr
+                    td CVV
+                    td #{order.card_cvv}
+                  tr
+                    td Holder
+                    td #{order.card_holder}
+                  tr
+                    td Expiration Date
+                    td #{order.card_expiration_date}
+        table.table
+          tbody
+            tr
+              td Order Status
+              td #{order.order_status}
+            tr
+              td Payment Method
+              td #{order.payment_method}

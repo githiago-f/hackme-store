@@ -1,9 +1,53 @@
 extends ../layout
 
+block head
+  style.
+    form.column-form div {
+      margin-bottom: 8px;
+    }
+
+
 block content
   section
     .centered-content
       h1= product.product_name
       p.product-price= Number(product.product_price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
       div.product-description!= product.description
-      span.status= (product.deletedAt === null) ? ' available' : ' unavailable'
+      span.status= (product.deletedAt === null) ? ' disponível' : ' indisponível'
+
+      if typeof user !== 'undefined'
+        div
+          h3 Comprar
+          form.column-form(action="/orders", method="POST")
+            input(name="product_id", hidden=true, value=product.product_id)
+            div.column
+              label(for="payment_method") Método de pagamento
+              select.input#payment_method(name="payment_method", required=true)
+                option(value="pix") Pix
+                option(value="card") Cartão
+                option(value="boleto") Boleto
+            div
+              if cards
+                label#card_used_label(for="card_used", style="display: none;") Usar cartão:
+                select#card_used(name="card_used", hidden=true)
+                  for card in cards
+                    option(value=card.card_id)
+                     | #{card.card_flag} #{String(card.card_number||'').substring(0, 4)}
+                script.
+                  const paymentMethod = document.getElementById('payment_method');
+                  paymentMethod.onchange = () => {
+                    const cardInput = document.getElementById('card_used');
+                    const cardLabel = document.getElementById('card_used_label');
+                    if(paymentMethod.value === 'card') {
+                      cardLabel.style.display = 'block';
+                      cardInput.hidden = false;
+                      cardInput.required = true;
+                    } else {
+                      cardLabel.style.display = 'none';
+                      cardInput.hidden = true;
+                      cardInput.required = false;
+                      cardInput.value = null;
+                    }
+                  }
+            div.column
+              button.cyan(type="submit") Concluir pedido
