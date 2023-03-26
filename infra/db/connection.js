@@ -1,6 +1,13 @@
 import knex from 'knex';
+import {rootLogger} from "../logging/root-logger.js";
+
+const logger = rootLogger.child(
+  { component: 'knex' },
+  true
+);
 
 const config = {
+  debug: true,
   client: 'mysql2',
   connection: {
     host: process.env.IS_DOCKER === 'yes' ? 'sales_db' : 'localhost',
@@ -16,11 +23,9 @@ const config = {
     directory: './seeds/dev'
   },
   log: {
-    enableColors: true,
-    inspectionDepth: 3,
-    debug: console.debug,
-    warn: console.warn,
-    error: console.error
+    debug: logger.debug,
+    warn: logger.warn,
+    error: logger.error
   }
 };
 

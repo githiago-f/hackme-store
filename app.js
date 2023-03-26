@@ -1,16 +1,16 @@
+import './infra/auth/auth-providers.js';
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import flash from 'connect-flash';
 import logger from 'morgan';
 import * as url from 'url';
 import { rootLogger } from './infra/logging/root-logger.js';
 import { createServer } from 'node:http';
 import session from 'express-session';
-import './infra/login/auth-providers.js';
 
 import products from './routes/products.js';
-import ordersWithError from "./routes/orders-with-error.js";
 import orders from './routes/orders.js';
 import auth from "./routes/auth.js";
 import passport from "passport";
@@ -25,6 +25,7 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -35,15 +36,13 @@ const sessionMiddleware = passport.authenticate('session');
 app.use(session({
   secret: 'sql_injection_project_vulnerable_secret', // this secret is also a vulnerability.
   resave: false,
-  saveUninitialized: false,
-  cookie: {}
+  saveUninitialized: false
 }));
 
 app.get('/', (req, res) => res.redirect('/products'));
 app.use('/auth', sessionMiddleware, auth);
 app.use('/products', sessionMiddleware, products);
 app.use('/orders', sessionMiddleware, orders);
-app.use('/with-error/orders', sessionMiddleware, ordersWithError);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,7 +53,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, _) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = err;
 
   // render the error page
   res.status(err.status || 500);

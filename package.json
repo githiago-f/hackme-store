@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node app.js | npx bunyan",
-    "dev": "npx nodemon --watch . -e js app.js | npx bunyan",
+    "dev": "DEBUG=knex:query npx nodemon --watch . -e js app.js | npx bunyan",
     "knex": "npx knex --knexfile ./infra/db/connection.js",
     "migrate": "npm run knex migrate:latest | npx bunyan",
     "seed": "npm run knex seed:run | npx bunyan",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bunyan": "^1.8.15",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "express": "~4.16.1",
     "express-session": "^1.17.3",

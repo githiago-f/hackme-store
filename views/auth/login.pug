@@ -17,13 +17,18 @@ block head
     }
 
 block content
-  h1 Sign in
-  form(method="GET", action="/auth")
+  h1 Login
+  form(method="POST", action="/auth")
     div
       label(for="email") E-mail
       input#email(type="email", name="email", placeholder="email@email.com")
     div
-      label(for="password") Password
+      label(for="password") Senha
       input#password(type="password", name="password", placeholder="*****")
     div
+      if typeof error !== 'undefined'
+        p #{error}
+    div
       button.cyan(type="submit") Enviar
+      span &nbsp; ou &nbsp;
+      a(href="/auth/register") cadastre-se

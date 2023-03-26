@@ -49,8 +49,8 @@ nav
       a(href="/products") Home
     if typeof user === 'undefined'
       li
-        a(href="/auth/login") Login
-    if typeof user !== 'undefined'
+        a(href="/auth") Login
+    if (typeof user !== 'undefined') && (user.role === "admin")
       li
         a(href="/with-error/orders") Orders
     if typeof user !== 'undefined'
