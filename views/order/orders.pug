@@ -61,3 +61,4 @@ block content
             td #{order.user_email}
             td #{Number(order.product_price).toLocaleString('pt-br', { currency: 'BRL', style: 'currency' })}
             td #{order.product_name}
+    include ../components/pagination
