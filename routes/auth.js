@@ -2,6 +2,7 @@ import {Router} from "express";
 import { page } from '../lib/page-render.js';
 import passport from "passport";
 import {db} from "../infra/db/connection.js";
+import {redirect} from "../lib/redirect.js";
 
 const router = Router();
 
@@ -11,6 +12,7 @@ router.post('/', passport.authenticate('local', {
   failureFlash: true
 }));
 
+router.get('/', redirect('/auth/login'))
 router.get('/login', page('auth/login', { title: 'Sign In' }));
 
 router.get('/register', page('auth/register', { title: 'Sign Up' }));

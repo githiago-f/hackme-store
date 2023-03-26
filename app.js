@@ -6,14 +6,15 @@ import cookieParser from 'cookie-parser';
 import flash from 'connect-flash';
 import logger from 'morgan';
 import * as url from 'url';
-import { rootLogger } from './infra/logging/root-logger.js';
 import { createServer } from 'node:http';
 import session from 'express-session';
+import passport from "passport";
 
+import { rootLogger } from './infra/logging/root-logger.js';
 import products from './routes/products.js';
 import orders from './routes/orders.js';
 import auth from "./routes/auth.js";
-import passport from "passport";
+import {redirect} from "./lib/redirect.js";
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -39,7 +40,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.get('/', (req, res) => res.redirect('/products'));
+app.get('/', redirect('/products'));
 app.use('/auth', sessionMiddleware, auth);
 app.use('/products', sessionMiddleware, products);
 app.use('/orders', sessionMiddleware, orders);
