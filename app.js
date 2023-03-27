@@ -37,7 +37,10 @@ const sessionMiddleware = passport.authenticate('session');
 app.use(session({
   secret: 'sql_injection_project_vulnerable_secret', // this secret is also a vulnerability.
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: false
+  }
 }));
 
 app.get('/', redirect('/products'));

@@ -9,12 +9,14 @@
     "knex": "npx knex --knexfile ./infra/db/connection.js",
     "migrate": "npm run knex migrate:latest | npx bunyan",
     "seed": "npm run knex seed:run | npx bunyan",
-    "docker": "npm run migrate && npm run seed && npm run dev"
+    "docker": "npm run migrate && npm run seed && npm run dev",
+    "attacker": "node ./explorer-server/explorer.app.js | npx bunyan"
   },
   "dependencies": {
     "bunyan": "^1.8.15",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "express": "~4.16.1",
     "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
