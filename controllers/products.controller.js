@@ -14,7 +14,7 @@ const index = async (req, res, next) => {
   try {
     const {page, perPage} = req.query;
     const data = (await db.raw(findAllProducts(req.query)))[0];
-    const count = getCount(countAllProducts(req.query));
+    const count = await getCount(countAllProducts(req.query));
 
     res.render('product/products', {
       title: 'Produtos',
