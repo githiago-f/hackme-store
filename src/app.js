@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import flash from 'connect-flash';
 import logger from 'morgan';
 import * as url from 'url';
-import { createServer } from 'node:http';
 import session from 'express-session';
 import passport from "passport";
 
@@ -29,7 +28,7 @@ app.use(express.json());
 app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 const sessionMiddleware = passport.authenticate('session');
 
@@ -65,16 +64,7 @@ app.use(function(err, req, res, _) {
   rootLogger.error(err);
 });
 
-const port = process.env.PORT ?? 8080;
+export const port = process.env.PORT ?? 8080;
 app.set('port', port);
 
-const server = createServer(app);
-server.listen(8080, () => {
-  let { address, family, port } = server.address();
-  if(family === 'IPv6' && address === '::') {
-    address = 'localhost';
-  }
-  app.set('address', address);
-  rootLogger.info(`Listening on http://${address}:${port}`);
-});
-
+export default app;

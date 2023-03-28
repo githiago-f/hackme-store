@@ -1,5 +1,5 @@
 import {db} from "../infra/db/connection.js";
-import {countAllProducts, findAllProducts} from "../data/sql/products.sql.js";
+import {countAllProducts, findAllProducts} from "../infra/db/sql/products.sql.js";
 import {getCount} from "../lib/get-count.js";
 import {makeUrl} from "../lib/make-url.js";
 import createError from "http-errors";

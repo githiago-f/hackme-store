@@ -1,7 +1,7 @@
 import {db} from "../infra/db/connection.js";
 import {makeUrl} from "../lib/make-url.js";
 import createError from "http-errors";
-import {countOrders, findOrders} from "../data/sql/orders.sql.js";
+import {countOrders, findOrders} from "../infra/db/sql/orders.sql.js";
 import {rootLogger} from "../infra/logging/root-logger.js";
 import {getCount} from "../lib/get-count.js";
 

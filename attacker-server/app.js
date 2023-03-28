@@ -22,8 +22,9 @@ app.get('/view-data', (req, res) => {
 });
 
 app.get('/save-data', (req, res) => {
-  data.add(decodeURIComponent(req.query.cookies));
-  logger.info('Saved data: ', req.query.cookies);
+  const cookie = decodeURIComponent(req.query.cookies);
+  data.add(cookie);
+  logger.info('Saved data: ', cookie);
   res.end();
 });
 

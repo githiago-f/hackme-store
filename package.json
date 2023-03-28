@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node app.js | npx bunyan",
-    "dev": "DEBUG=knex:query npx nodemon --watch . -e js app.js | npx bunyan",
-    "knex": "npx knex --knexfile ./infra/db/connection.js",
+    "start": "node src/server.js | npx bunyan",
+    "dev": "DEBUG=knex:query npx nodemon --watch . -e js src/server.js | npx bunyan",
+    "knex": "npx knex --knexfile src/infra/db/connection.js",
     "migrate": "npm run knex migrate:latest | npx bunyan",
     "seed": "npm run knex seed:run | npx bunyan",
     "docker": "npm run migrate && npm run seed && npm run dev",
-    "attacker": "node ./explorer-server/explorer.app.js | npx bunyan"
+    "attacker": "node attacker-server/app.js | npx bunyan"
   },
   "dependencies": {
     "bunyan": "^1.8.15",

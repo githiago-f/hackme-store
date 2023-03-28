@@ -2,7 +2,7 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import { db } from "../db/connection.js";
 import { rootLogger } from "../logging/root-logger.js";
-import {getUser} from "../../data/sql/auth.js";
+import {getUser} from "../db/sql/auth.js";
 
 const logger = rootLogger.child(
   { component: 'authentication' },
