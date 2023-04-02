@@ -10,6 +10,13 @@ const logger = rootLogger.child(
   true
 );
 
+/**
+ *
+ * @param {import('express').Request} req
+ * @param res
+ * @param next
+ * @returns {Promise<void>}
+ */
 const index = async (req, res, next) => {
   try {
     const {page, perPage} = req.query;
@@ -22,7 +29,7 @@ const index = async (req, res, next) => {
       totalItems: count,
       totalPages: Math.floor(count / (perPage??10)),
       currentPage: parseInt(page??'0'),
-      url: makeUrl('/products', req.query),
+      url: makeUrl('/products', req.query, req.app.get('address')),
       user: req.user
     });
   } catch (e) {

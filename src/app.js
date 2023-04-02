@@ -13,7 +13,7 @@ import { rootLogger } from './infra/logging/root-logger.js';
 import products from './routes/products.js';
 import orders from './routes/orders.js';
 import auth from "./routes/auth.js";
-import {redirect} from "./lib/redirect.js";
+import {page} from "./lib/page-render.js";
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -23,7 +23,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(logger('common'));
 app.use(express.json());
 app.use(flash());
 app.use(express.urlencoded({ extended: false }));
@@ -42,7 +42,7 @@ app.use(session({
   }
 }));
 
-app.get('/', redirect('/products'));
+app.get('/', page('index', { title: 'Home' }));
 app.use('/auth', sessionMiddleware, auth);
 app.use('/products', sessionMiddleware, products);
 app.use('/orders', sessionMiddleware, orders);

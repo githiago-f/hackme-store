@@ -22,7 +22,7 @@ const index = async (req, res, next) => {
       totalPages: Math.floor(count / (perPage??10)),
       currentPage: parseInt(page??'0'),
       user: req.user,
-      url: makeUrl('/orders', req.query)
+      url: makeUrl('/orders', req.query, req.get('address'), req.get('port'))
     });
   } catch (e) {
     next(createError(e));

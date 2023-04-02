@@ -2,19 +2,30 @@ extends ../layout
 
 block content
   section
-    div(style="margin: 20px 0")
-      form(method="GET", action="/products")
-        input.input#search(name="product", value="", placeholder="Search by product name")
-        button.input.cyan(type="submit") Buscar
+    div.centered-content
+      form.column-form(method="GET", action="/products")
+        div.mb-1
+          input.input#search(name="product", value="", placeholder="Search by product name")
+          button.input.cyan(type="submit") Buscar
+        div.mb-1
+          div#sortByContainer(hidden=true)
+            label(for="sortBy") Ordenar por &nbsp;
+            select#sortBy(name="sortBy")
+              option(value="product_name") Nome
+              option(value="product_price", selected=true) Preço
+              option(value="createdAt") Data de criação
+          div#orderContainer(hidden=true)
+            label(for="order") Ordem &nbsp;
+            select#order(name="order")
+              option(value="ASC", selected=true) Crescente
+              option(value="DESC") Decrescente
+      button#toggle Mostrar filtros
     div
       h1 Welcome to MaryStore
-    script.
-      const productFieldValue = new URL(location.href).searchParams.get('product')
-      if(productFieldValue)
-        document.getElementById('search').value = productFieldValue;
+    script(src="/javascripts/products-page-fields.js", async=true)
     .products-container
       each product in products
-        .product
+        div.product(id=`product-${product.product_id}`)
           h2= product.product_name
           div.product-description!= product.description
           p.price=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})

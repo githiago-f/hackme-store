@@ -24,7 +24,7 @@ passport.use('local', new LocalStrategy(options, (email, password, next) => {
     const query = db.raw(getUser({email, password}));
     query.then(([user]) => {
       logger.info(user);
-      if(!user) {
+      if(user.length<=0) {
         return next(null, false, { message: 'Username invalid!' });
       }
       logger.info('User found! ', user);
