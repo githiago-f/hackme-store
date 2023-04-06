@@ -18,45 +18,45 @@ export const seed = async function(knex) {
       "product_name": "dolore id duis irure",
       "product_price": 23.48,
       "deletedAt": knex.raw('CURRENT_TIMESTAMP'),
-      "description": "<h2>Consequat cillum mollit</h2> sunt eu elit nisi aliqua ad enim sint. Dolor proident labore qui excepteur commodo in. Deserunt enim magna tempor nisi aliquip sunt. Sunt irure ea in amet commodo dolor sunt ex occaecat consequat reprehenderit velit. Mollit ipsum ad tempor culpa irure exercitation mollit elit anim laboris sunt culpa aliquip in."
+      "product_description": "<h2>Consequat cillum mollit</h2> sunt eu elit nisi aliqua ad enim sint. Dolor proident labore qui excepteur commodo in. Deserunt enim magna tempor nisi aliquip sunt. Sunt irure ea in amet commodo dolor sunt ex occaecat consequat reprehenderit velit. Mollit ipsum ad tempor culpa irure exercitation mollit elit anim laboris sunt culpa aliquip in."
     },
     {
       "product_name": "consequat anim incididunt id",
       "product_price": 162.07,
-      "description": "<h2>Consequat cillum mollit</h2>Sunt quis in nisi irure ipsum duis. Et incididunt dolore deserunt eiusmod duis dolor aute in deserunt labore. Incididunt deserunt labore elit do et cillum esse laborum labore irure dolore amet sit proident. Et consectetur aliqua nisi sunt aliquip esse nisi culpa nisi reprehenderit deserunt eiusmod do. Consectetur elit nisi enim deserunt irure Lorem culpa incididunt dolore enim officia."
+      "product_description": "<h2>Consequat cillum mollit</h2>Sunt quis in nisi irure ipsum duis. Et incididunt dolore deserunt eiusmod duis dolor aute in deserunt labore. Incididunt deserunt labore elit do et cillum esse laborum labore irure dolore amet sit proident. Et consectetur aliqua nisi sunt aliquip esse nisi culpa nisi reprehenderit deserunt eiusmod do. Consectetur elit nisi enim deserunt irure Lorem culpa incididunt dolore enim officia."
     },
     {
       "product_name": "eu aliqua reprehenderit deserunt",
       "product_price": 45.93,
-      "description": "Amet labore dolore eiusmod elit aliquip veniam eu dolore laborum. Magna cillum duis commodo commodo ea laborum. Sint ad consectetur adipisicing ut qui et adipisicing ex commodo nisi sunt eu. Elit elit commodo eiusmod occaecat veniam proident incididunt reprehenderit velit qui. Qui officia aliqua nostrud elit do aute."
+      "product_description": "Amet labore dolore eiusmod elit aliquip veniam eu dolore laborum. Magna cillum duis commodo commodo ea laborum. Sint ad consectetur adipisicing ut qui et adipisicing ex commodo nisi sunt eu. Elit elit commodo eiusmod occaecat veniam proident incididunt reprehenderit velit qui. Qui officia aliqua nostrud elit do aute."
     },
     {
       "product_name": "et commodo anim voluptate",
       "product_price": 43.48,
       "deletedAt": knex.raw('CURRENT_TIMESTAMP'),
-      "description": "Consectetur aute ullamco magna non eu quis dolor duis excepteur. Ipsum anim voluptate cupidatat labore non id amet eu fugiat culpa officia et occaecat. Consectetur eiusmod elit occaecat cillum occaecat sunt consectetur. Proident pariatur non aliquip fugiat enim non dolor est sint minim. Ut Lorem proident fugiat ullamco et fugiat labore ad cupidatat tempor."
+      "product_description": "Consectetur aute ullamco magna non eu quis dolor duis excepteur. Ipsum anim voluptate cupidatat labore non id amet eu fugiat culpa officia et occaecat. Consectetur eiusmod elit occaecat cillum occaecat sunt consectetur. Proident pariatur non aliquip fugiat enim non dolor est sint minim. Ut Lorem proident fugiat ullamco et fugiat labore ad cupidatat tempor."
     },
     {
       "product_name": "ad dolor nostrud culpa",
       "product_price": 38.68,
-      "description": "Pariatur duis nulla quis dolore Lorem minim anim. Proident sint esse consequat officia. Commodo do sint amet dolore laboris irure consectetur consectetur aliquip deserunt cillum aliquip veniam ullamco. Ex id ex ex deserunt est id nulla laborum ullamco aliquip magna irure ea fugiat. Officia labore consectetur eiusmod excepteur pariatur sint laborum."
+      "product_description": "Pariatur duis nulla quis dolore Lorem minim anim. Proident sint esse consequat officia. Commodo do sint amet dolore laboris irure consectetur consectetur aliquip deserunt cillum aliquip veniam ullamco. Ex id ex ex deserunt est id nulla laborum ullamco aliquip magna irure ea fugiat. Officia labore consectetur eiusmod excepteur pariatur sint laborum."
     },
     {
       "product_name": "magna officia id ullamco",
       "product_price": 60.11,
-      "description": "Consectetur laborum et ipsum elit esse id laboris officia <b>laboris</b>quis in deserunt in labore. Elit dolore qui aliquip laboris. Sunt incididunt velit amet cillum consequat tempor minim nisi. Duis qui eu ut sunt Lorem tempor proident non quis fugiat labore minim. Aliqua eu incididunt duis ex nostrud et aute ad nulla."
+      "product_description": "Consectetur laborum et ipsum elit esse id laboris officia <b>laboris</b>quis in deserunt in labore. Elit dolore qui aliquip laboris. Sunt incididunt velit amet cillum consequat tempor minim nisi. Duis qui eu ut sunt Lorem tempor proident non quis fugiat labore minim. Aliqua eu incididunt duis ex nostrud et aute ad nulla."
     },
     {
       "product_name": "reprehenderit et exercitation et",
       "product_price": 166.67,
       "deletedAt": knex.raw('CURRENT_TIMESTAMP'),
-      "description": "Eiusmod est labore laboris aute<b>laboris</b> nulla ex culpa deserunt velit. Id fugiat ipsum amet tempor ullamco mollit aliquip laborum enim. Ex sunt non in pariatur dolor dolore esse irure. Cupidatat mollit ut ipsum commodo nisi ea ad et minim anim incididunt incididunt velit. Dolore ad ex laboris velit ad in adipisicing."
+      "product_description": "Eiusmod est labore laboris aute<b>laboris</b> nulla ex culpa deserunt velit. Id fugiat ipsum amet tempor ullamco mollit aliquip laborum enim. Ex sunt non in pariatur dolor dolore esse irure. Cupidatat mollit ut ipsum commodo nisi ea ad et minim anim incididunt incididunt velit. Dolore ad ex laboris velit ad in adipisicing."
     },
     {
       "product_name": "eu voluptate eu exercitation",
       "product_price": 145.78,
       "deletedAt": knex.raw('CURRENT_TIMESTAMP'),
-      "description": "Culpa eiusmod incididunt nisi <b>laboris</b> ex dolor fugiat. Minim fugiat laboris occaecat laboris cupidatat esse sint <b>laboris</b> non do ipsum eu elit ipsum. Aliquip reprehenderit sit dolor voluptate ea ex duis aliqua amet amet. Deserunt <b>laboris</b>in occaecat consectetur ut Lorem pariatur. Sit enim ipsum aute deserunt."
+      "product_description": "Culpa eiusmod incididunt nisi <b>laboris</b> ex dolor fugiat. Minim fugiat laboris occaecat laboris cupidatat esse sint <b>laboris</b> non do ipsum eu elit ipsum. Aliquip reprehenderit sit dolor voluptate ea ex duis aliqua amet amet. Deserunt <b>laboris</b>in occaecat consectetur ut Lorem pariatur. Sit enim ipsum aute deserunt."
     },
     {
       "product_name": "Caneta",

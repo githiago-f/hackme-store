@@ -12,7 +12,7 @@ block content
     .centered-content
       h1= product.product_name
       p.product-price= Number(product.product_price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-      div.product-description!= product.description
+      div.product-description!= product.product_description
       span.status= (product.deletedAt === null) ? ' disponível' : ' indisponível'
 
       if typeof user !== 'undefined'

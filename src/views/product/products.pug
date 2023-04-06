@@ -27,7 +27,7 @@ block content
       each product in products
         div.product(id=`product-${product.product_id}`)
           h2= product.product_name
-          div.product-description!= product.description
+          div.product-description!= product.product_description
           p.price=Number(product.product_price).toLocaleString('pt-br', {currency: 'BRL', style: 'currency'})
           div
             span.status= (product.deletedAt === null) ? ' disponível' : ' indisponível'
