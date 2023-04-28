@@ -5,12 +5,12 @@
 export const seed = async function(knex) {
   const cardTable = 'card_data';
   const ordersTable = 'orders';
-  const table = 'users';
+  const usersTable = 'users';
   const productsTable = 'products';
 
   await knex(ordersTable).del();
   await knex(cardTable).del();
-  await knex(table).del();
+  await knex(usersTable).del();
   await knex(productsTable).del();
 
   await knex(productsTable).insert([
@@ -105,36 +105,37 @@ export const seed = async function(knex) {
   ]);
   const products = (await knex(productsTable).select('product_id')).map(i=>i.product_id);
 
-  await knex(table).insert([
+  await knex(usersTable).insert([
       {
-        "user_name": "Agnes",
-        "user_email": "agnes_evans@gmail.com",
-        "user_surname": "Evans",
-        "user_password": "123456"
+        "user_name": "Administrador",
+        "user_email": "admin@admin.com",
+        "user_surname": "Sistema",
+        "user_password": "P@ssw0rd!",
+        "role": "admin"
       },
       {
         "user_name": "Houston",
         "user_email": "houston_wooten@gmail.com",
         "user_surname": "Wooten",
-        "user_password": "123456"
+        "user_password": "sasa"
       },
       {
         "user_name": "Doris",
         "user_email": "doris_cole@gmail.com",
         "user_surname": "Cole",
-        "user_password": "123456"
+        "user_password": "DADA"
       },
       {
         "user_name": "Duncan",
         "user_email": "duncan_sosa@gmail.com",
         "user_surname": "Sosa",
-        "user_password": "123456"
+        "user_password": "march2011"
       },
       {
         "user_name": "Owen",
         "user_email": "owen_sykes@gmail.com",
         "user_surname": "Sykes",
-        "user_password": "123456"
+        "user_password": "starwars"
       },
       {
         "user_name": "Rosario",
@@ -146,28 +147,28 @@ export const seed = async function(knex) {
         "user_name": "Delia",
         "user_email": "delia_holder@gmail.com",
         "user_surname": "Holder",
-        "user_password": "123456"
+        "user_password": "7777777"
       },
       {
         "user_name": "Macdonald",
         "user_email": "macdonald_berger@gmail.com",
         "user_surname": "Berger",
-        "user_password": "123456"
+        "user_password": "killer"
       },
       {
         "user_name": "Ball",
         "user_email": "ball_solomon@gmail.com",
         "user_surname": "Solomon",
-        "user_password": "123456"
+        "user_password": "office"
       },
       {
         "user_name": "Hogan",
         "user_email": "hogan_brady@gmail.com",
         "user_surname": "Brady",
-        "user_password": "123456"
+        "user_password": "qwerty"
       }
     ]);
-  const users  = (await knex(table).select('user_id')).map(i=>i.user_id);
+  const users  = (await knex(usersTable).select('user_id')).map(i=>i.user_id);
 
   await knex(cardTable).insert([
     {
