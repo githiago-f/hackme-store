@@ -64,7 +64,9 @@ app.use(function(err, req, res, _) {
   rootLogger.error(err);
 });
 
-export const port = process.env.PORT ?? 8080;
-app.set('port', port);
+export const httpPort = process.env.PORT ?? 8080;
+export const httpsPort = process.env.SECURE_PORT ?? 8443;
+app.set('port', httpPort);
+app.set('sport', httpsPort);
 
 export default app;
